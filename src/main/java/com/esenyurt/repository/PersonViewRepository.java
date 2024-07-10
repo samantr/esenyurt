@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface PersonViewRepository extends JpaRepository<PersonView,Long> {
-    @Query(value = "select * from vw_gen_person v where upper(v.person_name) like '%'+ upper(?1) +'%'",nativeQuery = true)
+    @Query(value = "select v from PersonView v where upper(v.name) like concat('%', upper(?1) ,'%')")
     List<PersonView> findByName(String name);
-    @Query(value = "select * from vw_gen_person v where upper(v.full_name) like '%'+ upper(?1) +'%'",nativeQuery = true)
+    @Query(value = "select v from PersonView v where upper(v.fullName) like concat('%', upper(?1) ,'%')")
     List<PersonView> findByFullName(String fullName);
 }

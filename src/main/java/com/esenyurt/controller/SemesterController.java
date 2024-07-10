@@ -11,35 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/semester")
 public class SemesterController {
 
     @Autowired
     private SemesterService semesterService;
 
-    @PostMapping("/save")
-    public ResponseEntity<?> saveSemester(@RequestBody Semester semester)
+    @PostMapping("/semester")
+    public ResponseEntity<?> createSemester(@RequestBody Semester semester)
     {
-        return new ResponseEntity<>(semesterService.saveSemester(semester),HttpStatus.OK);
+        return new ResponseEntity<>(semesterService.createSemester(semester),HttpStatus.OK);
     }
-    @GetMapping("/fetch")
-    public ResponseEntity<?> fetchSemester()
+    @GetMapping("/semester")
+    public ResponseEntity<?> readSemester()
     {
         List<Semester> semesterList = new ArrayList<>();
-        semesterList = semesterService.fetchSemesters();
+        semesterList = semesterService.readSemesters();
         ResponseEntity<?> listResponseEntity;
         listResponseEntity = new ResponseEntity<>(semesterList, HttpStatus.OK);
 
         return listResponseEntity;
     }
 
-    @PutMapping("/update")
+    @PutMapping("/semester")
     public ResponseEntity<?> updateSemester(@RequestBody Semester semester)
     {
         return new ResponseEntity<>(semesterService.updateSemester(semester),HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/semester/{id}")
     public void deleteSemester(@PathVariable Long id)
     {
         semesterService.deleteSemesterById(id);

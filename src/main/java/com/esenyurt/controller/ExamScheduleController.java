@@ -11,34 +11,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/examSchedule")
 public class ExamScheduleController {
 
     @Autowired
     private ExamScheduleService examScheduleService;
-    @PostMapping("/save")
-    public ResponseEntity<?> saveExamSchedule(@RequestBody ExamSchedule examSchedule)
+    @PostMapping("/exam-schedule")
+    public ResponseEntity<?> createExamSchedule(@RequestBody ExamSchedule examSchedule)
     {
-        return new ResponseEntity<>(examScheduleService.saveExamSchedule(examSchedule),HttpStatus.OK);
+        return new ResponseEntity<>(examScheduleService.createExamSchedule(examSchedule),HttpStatus.OK);
     }
-    @GetMapping("/fetch")
-    public ResponseEntity<List> fetchExamSchedules()
+    @GetMapping("/exam-schedule")
+    public ResponseEntity<List> readExamSchedules()
     {
         List<ExamSchedule> ExamScheduleList = new ArrayList<>();
-        ExamScheduleList = examScheduleService.fetchExamSchedules();
+        ExamScheduleList = examScheduleService.readExamSchedules();
         ResponseEntity<List> listResponseEntity;
         listResponseEntity = new ResponseEntity<List>(ExamScheduleList,HttpStatus.OK);
 
         return listResponseEntity;
     }
 
-    @PutMapping("/update")
+    @PutMapping("/exam-schedule")
     public ExamSchedule updateExamSchedule(@RequestBody ExamSchedule ExamSchedule)
     {
         return examScheduleService.updateExamSchedule(ExamSchedule);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/exam-schedule/{id}")
     public void deleteExamSchedule(@PathVariable Long id)
     {
         examScheduleService.deleteExamScheduleById(id);

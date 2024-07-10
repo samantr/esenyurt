@@ -4,6 +4,8 @@ public enum ErrorMessages {
 
     TRANSACTION_FAILED("1","transaction failed"),
     RECORD_NOT_FOUND("2","record not found"),
+
+    OBJECT_ALREADY_EXISTS("3","Object already exists")
     ;
 
 

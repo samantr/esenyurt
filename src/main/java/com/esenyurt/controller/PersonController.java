@@ -12,48 +12,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
 public class PersonController {
 
     @Autowired
     private PersonService personService;
     @Autowired
     private PersonViewService personViewService;
-    @PostMapping("/save")
-    public ResponseEntity<?> savePerson(@RequestBody Person person)
+    @PostMapping("/person")
+    public ResponseEntity<?> createPerson(@RequestBody Person person)
     {
-        return new ResponseEntity<>(personService.savePerson(person),HttpStatus.OK);
+        return new ResponseEntity<>(personService.createPerson(person),HttpStatus.CREATED);
     }
-    @GetMapping("/fetch")
-    public ResponseEntity<List> fetchPersons()
+    @GetMapping("/person")
+    public ResponseEntity<List> readPersons()
     {
         List<Person> personList = new ArrayList<>();
-        personList = personService.fetchPersons();
+        personList = personService.readPersons();
         ResponseEntity<List> listResponseEntity;
         listResponseEntity = new ResponseEntity<List>(personList,HttpStatus.OK);
 
         return listResponseEntity;
     }
 
-    @PutMapping("/update")
+    @PutMapping("/person")
     public Person updatePerson(@RequestBody Person person)
     {
         return personService.updatePerson(person);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/person/{id}")
     public void deletePerson(@PathVariable Long id)
     {
         personService.deletePersonById(id);
     }
 
-    @GetMapping("/findByName/{name}")
+    @GetMapping("/person/by-name/{name}")
     public ResponseEntity<?> findByName(@PathVariable String name)
     {
         return new ResponseEntity<>(personViewService.findByName(name),HttpStatus.OK);
     }
 
-    @GetMapping("/findByFullName/{fullName}")
+    @GetMapping("/person/by-full-name/{fullName}")
     public ResponseEntity<?> findByFullName(@PathVariable String fullName)
     {
         return new ResponseEntity<>(personViewService.findByFullName(fullName),HttpStatus.OK);

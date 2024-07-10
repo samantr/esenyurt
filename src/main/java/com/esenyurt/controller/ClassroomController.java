@@ -1,7 +1,7 @@
 package com.esenyurt.controller;
 
 import com.esenyurt.entity.Classroom;
-import com.esenyurt.service.ClassroomService;
+import com.esenyurt.service.ClassroomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,34 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/classroom")
 public class ClassroomController {
 
     @Autowired
-    private ClassroomService classroomService;
-    @PostMapping("/save")
-    public ResponseEntity<?> saveClassroom(@RequestBody Classroom classroom)
+    private ClassroomServiceImpl classroomService;
+    @PostMapping("/classroom")
+    public ResponseEntity<?> createClassroom(@RequestBody Classroom classroom)
     {
-        return new ResponseEntity<>(classroomService.saveClassroom(classroom),HttpStatus.OK);
+        return new ResponseEntity<>(classroomService.createClassroom(classroom),HttpStatus.OK);
     }
-    @GetMapping("/fetch")
-    public ResponseEntity<List> fetchClassrooms()
+    @GetMapping("/classroom")
+    public ResponseEntity<List> readClassrooms()
     {
         List<Classroom> classroomList = new ArrayList<>();
-        classroomList = classroomService.fetchClassrooms();
+        classroomList = classroomService.readClassrooms();
         ResponseEntity<List> listResponseEntity;
         listResponseEntity = new ResponseEntity<List>(classroomList,HttpStatus.OK);
 
         return listResponseEntity;
     }
 
-    @PutMapping("/update")
+    @PutMapping("/classroom")
     public Classroom updateClassroom(@RequestBody Classroom Classroom)
     {
         return classroomService.updateClassroom(Classroom);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/classroom/{id}")
     public void deleteClassroom(@PathVariable Long id)
     {
         classroomService.deleteClassroomById(id);
