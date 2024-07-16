@@ -18,9 +18,9 @@ public class SemesterService {
     private SemesterRepository semesterRepository;
 
     public Semester createSemester(Semester semester) {
-
-        if (semesterRepository.findById(semester.getId()).isPresent())
-            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
+        if(semester.getId() != null)
+            if (semesterRepository.findById(semester.getId()).isPresent())
+                throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
 
         try
         {

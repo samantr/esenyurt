@@ -18,8 +18,9 @@ public class ExamScheduleService {
 
     public ExamSchedule createExamSchedule(ExamSchedule examSchedule) {
 
-        if (examScheduleRepository.findById(examSchedule.getId()).isPresent())
-            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
+        if(examSchedule.getId() != null)
+            if (examScheduleRepository.findById(examSchedule.getId()).isPresent())
+                throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
 
         try
         {

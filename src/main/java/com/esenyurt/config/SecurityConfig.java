@@ -48,6 +48,7 @@ public class SecurityConfig {
                         authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
                                 //.requestMatchers("/semester/*").hasAuthority("ADMIN")
+                                //.requestMatchers(HttpMethod.GET, "/person").permitAll()
                                 .anyRequest().authenticated()
 
                 );

@@ -21,7 +21,6 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto, HttpServletRequest request){
-
         return new ResponseEntity<>(authService.authenticateUser(loginDto, request), HttpStatus.OK);
     }
 
@@ -46,4 +45,5 @@ public class AuthController {
         return new ResponseEntity<>("User logged out successfully", HttpStatus.OK);
 
     }
+
 }

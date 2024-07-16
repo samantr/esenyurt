@@ -19,8 +19,9 @@ public class ClassroomServiceImpl {
 
     public Classroom createClassroom(Classroom classroom) {
 
-        if (classroomRepository.findById(classroom.getId()).isPresent())
-            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
+        if(classroom.getId() != null)
+            if (classroomRepository.findById(classroom.getId()).isPresent())
+                throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
 
         try
         {

@@ -18,8 +18,9 @@ public class PersonService {
 
     public Person createPerson(Person person) {
 
-        if (personRepository.findById(person.getId()).isPresent())
-            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
+        if(person.getId() != null)
+            if (personRepository.findById(person.getId()).isPresent())
+                throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), ErrorMessages.OBJECT_ALREADY_EXISTS.getTitle(), HttpStatus.BAD_REQUEST);
 
         try
         {
