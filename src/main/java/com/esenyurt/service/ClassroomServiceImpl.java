@@ -28,9 +28,8 @@ public class ClassroomServiceImpl {
             return classroomRepository.save(classroom);
         } catch (Exception e)
         {
-            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), e.getMessage().toString(), HttpStatus.BAD_REQUEST);
+            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
     }
 
 
@@ -40,7 +39,7 @@ public class ClassroomServiceImpl {
             return classroomRepository.findAll();
         }catch (Exception e)
         {
-            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), e.getMessage().toString(), HttpStatus.BAD_REQUEST);
+            throw new ApplicationException(ErrorMessages.TRANSACTION_FAILED.getValue(), e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -49,7 +48,7 @@ public class ClassroomServiceImpl {
 
         Optional<Classroom> classroomOptional = classroomRepository.findById(classroom.getId());
 
-        if(classroom.getId() == null || !classroomOptional.isPresent())
+        if(classroom.getId() == null || classroomOptional.isEmpty())
             throw new ApplicationException(ErrorMessages.RECORD_NOT_FOUND.getValue(), ErrorMessages.RECORD_NOT_FOUND.getTitle(), HttpStatus.BAD_REQUEST);
 
 
@@ -61,7 +60,7 @@ public class ClassroomServiceImpl {
 
         Optional<Classroom> classroomOptional = classroomRepository.findById(id);
 
-        if(!classroomOptional.isPresent())
+        if(classroomOptional.isEmpty())
             throw new ApplicationException(ErrorMessages.RECORD_NOT_FOUND.getValue(), ErrorMessages.RECORD_NOT_FOUND.getTitle(), HttpStatus.BAD_REQUEST);
 
         classroomRepository.deleteById(id);

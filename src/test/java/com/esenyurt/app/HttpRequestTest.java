@@ -25,14 +25,14 @@ import java.util.List;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HttpRequestTest {
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+//    @LocalServerPort
+//    private int port;
+//
+//    @Autowired
+//    private TestRestTemplate restTemplate;
+//
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
 
     @Autowired
     private PersonService personService;
@@ -67,7 +67,7 @@ public class HttpRequestTest {
         Person person = new Person();
         person.setName("dddddddd");
         person.setLastName("hhhhhhhh");
-        person.setCode("sssas");
+        person.setCode("ssppsas");
         Person newPerson = personService.createPerson(person);
         Assertions.assertThat(newPerson.getId() != null);
     }
